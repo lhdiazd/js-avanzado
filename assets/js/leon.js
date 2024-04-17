@@ -7,8 +7,9 @@ export default class Leon extends Animal{
         super(nombre, edad, img, comentarios, sonido);
     }
 
-    rugir(audioElementId) {
-        const audioElement = document.getElementById(audioElementId);
+    rugir(audioElement, rutaSonido) {
+        const audioElement = document.getElementById(audioElement);
+        audioElement.src = rutaSonido;
         audioElement.play();
     }
 
