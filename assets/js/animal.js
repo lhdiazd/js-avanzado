@@ -31,4 +31,9 @@ export class Animal{
         return this._sonido;
     }
 
+    playSound(){
+        throw new Error('El método sonido debe ser implementado por las subclases');
+    }
+    
+
 }

@@ -1,12 +1,13 @@
 import { Animal } from './animal.js';
 
-export class Leon extends Animal{
+
+export class Aguila extends Animal{
 
     constructor(nombre, edad, img, comentarios, sonido){
         super(nombre, edad, img, comentarios, sonido);
     }
 
-    rugir() {        
+    chillar() {        
         const audioElement = document.getElementById("player");
         audioElement.src = this.sonido;
         audioElement.currentTime = 0;
@@ -14,7 +15,7 @@ export class Leon extends Animal{
     }
 
     playSound(){
-        this.rugir();
-    }
+        this.chillar();
+    }   
 
 }

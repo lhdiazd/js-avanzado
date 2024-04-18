@@ -1,5 +1,6 @@
-import { Leon } from './leon.js';
 import { AnimalsDataModule } from './animalsDataModule.js';
+import { createAnimal, searchAnimal, addAnimal } from './utilsModule.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -7,8 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const ageSelect = document.getElementById("edad");
     const commentsTextarea = document.getElementById("comentarios");
     const registerButton = document.getElementById("btnRegistrar");
-    const animalImg = document.getElementById("animalImg");
+    const previewDiv = document.getElementById("preview");
     const baseImgURL = '../../assets/imgs/';
+    const baseSoundURL = '../../assets/sounds/';
+    let animalType;
+    let animalSelected;
+    let selectedAnimalIndex;
+    let selectedAgeIndex;
+    let commentsValue;
+    let animal;
     let animalsData = [];
 
     (async () => {
@@ -21,43 +29,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 
+    const resetForm = () => {
+        animalSelect.selectedIndex = 0;
+        ageSelect.selectedIndex = 0;
+        commentsTextarea.value = '';
+        previewDiv.style.backgroundImage = `url('${baseImgURL}/lion.svg')`;
+    }
+
+
+    animalSelect.addEventListener('change', () => {
+
+        selectedAnimalIndex = animalSelect.selectedIndex;
+
+        if (selectedAnimalIndex !== 0) {
+            try{
+                animalType = animalSelect.value;
+                animalSelected = searchAnimal(animalType, animalsData);
+                previewDiv.style.backgroundImage = `url('${baseImgURL}${animalSelected.imagen}')`;
+            } catch(error){
+                alert(error.message);
+            }                
+        }
+    })
+
 
     registerButton.addEventListener('click', () => {
 
-        let selectedAnimalIndex = animalSelect.selectedIndex;
-        let selectedAgeIndex = ageSelect.selectedIndex;
-        let commentsValue = commentsTextarea.value.trim();
-        let animal;
+        selectedAnimalIndex = animalSelect.selectedIndex;
+        selectedAgeIndex = ageSelect.selectedIndex;
+        commentsValue = commentsTextarea.value.trim();
 
         if (selectedAnimalIndex !== 0 && selectedAgeIndex !== 0 && commentsValue !== '') {
+            try {
+                animalType = animalSelect.value;
+                animalSelected = searchAnimal(animalType, animalsData);
+                let name = animalSelected.name;
+                let age = ageSelect.value;
+                let img = `${baseImgURL}${animalSelected.imagen}`;
+                let comments = commentsValue;
+                let sound = `${baseSoundURL}${animalSelected.sonido}`;
 
-            let animalType = animalSelect.value;
-            let animalSelected;
+                animal = createAnimal(animalType, name, age, img, comments, sound);
+                addAnimal(animal);
 
-            switch (animalType) {
-                case "Leon":
-                    animalSelected = animalsData[0];
-                    animal = new Leon(animalSelected.name, ageSelect.value, animalSelected.imagen, commentsValue, animalSelected.sonido);
-                    animalImg.src = `${baseImgURL}${animalSelected.imagen}`;
-                    break;
-                default:
-                    alert("Tipo de animal no reconocido");
-                    break;
+                resetForm();
+
+            } catch (error) {
+                alert(error.message);
             }
-
-            console.log(animal);
-
 
         } else {
             alert("Ingrese todos los campos del registro");
         }
-
-
     });
-
-
-
-
-
 });
 
