@@ -64,7 +64,7 @@ export function addAnimal(animal) {
         modal.show();
     });
 
-    iconButton.src = "../../assets/imgs/audio.svg";
+    iconButton.src = "./assets/imgs/audio.svg";
     iconButton.classList.add("icon-button");
 
     soundButton.classList.add("btn-secondary", "sound-button");

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerButton = document.getElementById("btnRegistrar");
     const previewDiv = document.getElementById("preview");
     const baseImgURL = './assets/imgs/';
-    const baseSoundURL = '../../assets/sounds/';
+    const baseSoundURL = './assets/sounds/';
     let animalType;
     let animalSelected;
     let selectedAnimalIndex;
