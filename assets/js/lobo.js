@@ -16,8 +16,6 @@ export class Lobo extends Animal{
 
     playSound(){
         this.aullar();
-    }
-
-    
+    }   
 
 }

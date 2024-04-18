@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentsTextarea = document.getElementById("comentarios");
     const registerButton = document.getElementById("btnRegistrar");
     const previewDiv = document.getElementById("preview");
-    const baseImgURL = '../../assets/imgs/';
+    const baseImgURL = './assets/imgs/';
     const baseSoundURL = '../../assets/sounds/';
     let animalType;
     let animalSelected;

@@ -1,6 +1,6 @@
 export async function AnimalsDataModule() {
     try {
-        const response = await fetch('../../animales.json');
+        const response = await fetch('./animales.json');
         if (!response.ok) {
             throw new Error('Error al obtener los datos de los animales');
         }
